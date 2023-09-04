@@ -1,0 +1,19 @@
+﻿DATA_BLOCK "LMB_ModbusDeviceRtu_CfgDb"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Veshtemov
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      com : "LMB_ModbusDeviceRtu_ComPortData";
+   END_VAR
+
+
+BEGIN
+   com.port := "Local~CB1";
+   com.baud := 9600;
+   com.parity := 2;
+   com.stopBits := 1;
+   com.retries := 1;
+
+END_DATA_BLOCK
+

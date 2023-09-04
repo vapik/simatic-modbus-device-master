@@ -1,0 +1,17 @@
+﻿FUNCTION "LMB_ModbusDeviceRtu_GetArrayLength" : UDInt
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      arr : Variant;
+   END_VAR
+
+
+BEGIN
+	IF IS_ARRAY(#arr) THEN
+	    #LMB_ModbusDeviceRtu_GetArrayLength := CountOfElements(IN := #arr);
+	ELSE
+	    #LMB_ModbusDeviceRtu_GetArrayLength := 0;
+	END_IF;
+	
+END_FUNCTION
+

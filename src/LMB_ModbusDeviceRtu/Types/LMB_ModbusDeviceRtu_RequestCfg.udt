@@ -1,0 +1,13 @@
+﻿TYPE "LMB_ModbusDeviceRtu_RequestCfg"
+VERSION : 0.1
+//Modbus request configuration
+   STRUCT
+      mode : USInt := 0;   // Mode
+      dataAddr : UDInt := 40001;   // Starting address in the slave
+      len : UInt := 1;   // Data length
+      mapAddr : DInt := 0;   // Starting address in the read/write buffer
+      enable : Bool := false;   // Enable request
+   END_STRUCT;
+
+END_TYPE
+

@@ -1,0 +1,218 @@
+﻿FUNCTION_BLOCK "LMB_ModbusDeviceRtu_Master"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      start : Bool;   // Start block
+   END_VAR
+
+   VAR_OUTPUT 
+      busy { ExternalWritable := 'False'} : Bool;   // In progress
+      done { ExternalWritable := 'False'} : Bool;   // Done
+   END_VAR
+
+   VAR_IN_OUT 
+      readBuffer : Variant;   // Pointer of read buffer (non optimized data block). For example, DB -> readBuffer: Array[0..125] of Word
+      writeBuffer : Variant;   // Pointer of write buffer (non optimized data block). For example, DB -> writeBuffer: Array[0..125] of Word
+      data : "LMB_ModbusDeviceRtu_Data";
+      mbMaster {InstructionName := 'Modbus_Master'; LibVersion := '3.2'} : Modbus_Master;   // Instance of Modbus_Master function block
+   END_VAR
+
+   VAR 
+      inst_startTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : R_TRIG;   // Detect start
+      inst_watchdogTimer {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;   // Timer for resetting a request when unknown reason is happened
+      state { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : USInt;   // Current state
+      i { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+      j { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;
+   END_VAR
+
+   VAR_TEMP 
+      tempStart : Bool;   // Start flag
+      tempRetval : Int;
+      tempQntRequests : Int;   // Quantity of requests
+   END_VAR
+
+   VAR CONSTANT 
+      STATE_STANDBY : USInt := 0;   // State. Standby
+      STATE_SETTINGS : USInt := 1;   // State. Get settings
+      STATE_READ : USInt := 2;   // State. Reading
+      STATE_WRITE : USInt := 3;   // State. Writing
+      STATE_HANDLE : USInt := 4;   // State. Handle results
+      WATCHDOG_TIME : Time := T#10S;   // Watchdog time
+      ERROR_ILLEGAL_REQUEST : Word := 16#8500;   // Error. Illegal request (check request settings)
+      ERROR_WATCHDOG_TIMER : Word := 16#8501;   // Error. Watchdog timer
+   END_VAR
+
+
+BEGIN
+	#tempQntRequests := UDINT_TO_INT("LMB_ModbusDeviceRtu_GetArrayLength"(arr := #data.requests));
+	#busy := (#state > #STATE_STANDBY); // Set busy flag
+	
+	#inst_startTrig(CLK := #start, Q => #tempStart);
+	
+	// When start go to Settings
+	IF #tempStart THEN
+	    
+	    #done := false;
+	    #state := #STATE_SETTINGS;
+	    
+	END_IF;
+	
+	CASE #state OF
+	        
+	    // Standby
+	    #STATE_STANDBY:
+	        
+	        #done := false;
+	        #i := 0;
+	        
+	    // Get request settings
+	    #STATE_SETTINGS:
+	        
+	        // With the first call we reset the counter, get the first request,
+	        // else we increase counter by 1 and get a next request
+	        IF #tempStart THEN
+	            #i := 0;
+	            
+	        ELSE
+	            #i := #i + 1;
+	            
+	            // When all requests is completed go to standby, set "done" flag 
+	            IF #i >= #tempQntRequests THEN
+	                #done := true;
+	                #state := #STATE_STANDBY;
+	                RETURN;
+	            END_IF;
+	        END_IF;
+	        
+	        // Check request settings: we have to skip disabled or invalid requests,
+	        // if a request is invalid - set ERROR_ILLEGAL_REQUEST status
+	        FOR #j := #i TO #tempQntRequests - 1 DO
+	            
+	            IF NOT #data.requests[#j].cfg.enable THEN
+	                
+	                #data.requests[#j].status.req := false;
+	                #data.requests[#j].status.done := false;
+	                #data.requests[#j].status.error := false;
+	                #data.requests[#j].status.status := 0;
+	                #data.requests[#j].status.errorCounter := 0;
+	                
+	            ELSIF NOT "LMB_ModbusDeviceRtu_ValidateRequest"(#data.requests[#j].cfg) THEN
+	                
+	                // Set error status
+	                #data.requests[#j].status.req := false;
+	                #data.requests[#j].status.done := false;
+	                #data.requests[#j].status.error := true;
+	                #data.requests[#j].status.status := #ERROR_ILLEGAL_REQUEST;
+	                #data.requests[#j].status.errorCounter := LIMIT(IN := #data.requests[#j].status.errorCounter + 1,
+	                                                                MN := 0,
+	                                                                MX := 65534);
+	            ELSE
+	                #i := #j;
+	                EXIT;
+	            END_IF;
+	            
+	            // When all requests is completed go to standby, set "done" flag
+	            IF #j = #tempQntRequests - 1 THEN
+	                #done := true;
+	                #state := #STATE_STANDBY;
+	                RETURN;
+	            END_IF;
+	            
+	        END_FOR;
+	        
+	        // For writing before request we have to copy data to external write buffer
+	        IF #data.requests[#i].cfg.mode > 0 THEN
+	            
+	            // Extract data from Modbus Device write buffer
+	            #tempRetval := Serialize(SRC_VARIABLE := #data.buffer.writeBuffer,
+	                                     DEST_ARRAY => #writeBuffer,
+	                                     POS := #data.requests[#i].cfg.mapAddr);
+	            #state := #STATE_WRITE;
+	        ELSE
+	            #state := #STATE_READ;
+	        END_IF;
+	        
+	        RETURN;
+	        
+	    // Read
+	    #STATE_READ, #STATE_WRITE:
+	        
+	        #data.requests[#i].status.req := true;
+	        
+	    // Handle results
+	    #STATE_HANDLE:
+	        
+	        #data.requests[#i].status.req := false;
+	        
+	        IF #data.requests[#i].status.done THEN
+	            #data.requests[#i].status.errorCounter := 0;
+	        ELSIF #data.requests[#i].status.error THEN
+	            #data.requests[#i].status.errorCounter := LIMIT(IN := #data.requests[#i].status.errorCounter + 1,
+	                                                            MN := 0,
+	                                                            MX := 65534);
+	        END_IF;
+	        
+	        #state := #STATE_SETTINGS;
+	        
+	    ELSE
+	        #state := #STATE_STANDBY;
+	END_CASE;
+	
+	// There are different buffers for reading and writing
+	IF (#state = #STATE_READ) THEN
+	    // Request
+	    #mbMaster(REQ := #data.requests[#i].status.req,
+	              MB_ADDR := #data.address,
+	              MODE := #data.requests[#i].cfg.mode,
+	              DATA_ADDR := #data.requests[#i].cfg.dataAddr,
+	              DATA_LEN := #data.requests[#i].cfg.len,
+	              DONE => #data.requests[#i].status.done,
+	              BUSY => #data.requests[#i].status.busy,
+	              ERROR => #data.requests[#i].status.error,
+	              STATUS => #data.requests[#i].status.status,
+	              DATA_PTR := #readBuffer);
+	    
+	ELSIF (#state = #STATE_WRITE) THEN
+	    // Запрос
+	    #mbMaster(REQ := #data.requests[#i].status.req,
+	              MB_ADDR := #data.address,
+	              MODE := #data.requests[#i].cfg.mode,
+	              DATA_ADDR := #data.requests[#i].cfg.dataAddr,
+	              DATA_LEN := #data.requests[#i].cfg.len,
+	              DONE => #data.requests[#i].status.done,
+	              BUSY => #data.requests[#i].status.busy,
+	              ERROR => #data.requests[#i].status.error,
+	              STATUS => #data.requests[#i].status.status,
+	              DATA_PTR := #writeBuffer);
+	END_IF;
+	
+	
+	// Waiting response status
+	IF ((#state = #STATE_READ
+	    OR #state = #STATE_WRITE)
+	    AND (#data.requests[#i].status.done
+	    OR #data.requests[#i].status.error))
+	THEN
+	    #state := #STATE_HANDLE;
+	END_IF;
+	
+	// Watchdog timer is needed when state stuck in Read or Write state for unknown reason,
+	// in that case we set request as invalid 
+	#inst_watchdogTimer(IN := (#state = #STATE_READ
+	               OR #state = #STATE_WRITE),
+	               PT := #WATCHDOG_TIME);
+	
+	IF #inst_watchdogTimer.Q THEN
+	    
+	    #data.requests[#i].status.done := false;
+	    #data.requests[#i].status.error := true;
+	    #data.requests[#i].status.status := #ERROR_WATCHDOG_TIMER;
+	    #data.requests[#i].status.errorCounter := LIMIT(IN := #data.requests[#i].status.errorCounter + 1,
+	                                                    MN := 0,
+	                                                    MX := 65534);
+	    
+	    #state := #STATE_HANDLE;
+	    
+	END_IF;
+END_FUNCTION_BLOCK
+

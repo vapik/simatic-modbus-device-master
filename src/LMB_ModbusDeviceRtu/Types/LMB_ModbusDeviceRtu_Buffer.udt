@@ -1,0 +1,10 @@
+﻿TYPE "LMB_ModbusDeviceRtu_Buffer"
+VERSION : 0.1
+//Raw data of Modbus device
+   STRUCT
+      readBuffer : Array[0..100] of Word;   // Read buffer
+      writeBuffer : Array[0..100] of Word;   // Write buffer
+   END_STRUCT;
+
+END_TYPE
+

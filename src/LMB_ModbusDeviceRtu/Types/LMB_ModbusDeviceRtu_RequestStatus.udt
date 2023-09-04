@@ -1,0 +1,14 @@
+﻿TYPE "LMB_ModbusDeviceRtu_RequestStatus"
+VERSION : 0.1
+//Modbus request status
+   STRUCT
+      req : Bool;
+      done : Bool;
+      busy : Bool;
+      error : Bool;
+      status : Word;   // Error code 
+      errorCounter : UInt;
+   END_STRUCT;
+
+END_TYPE
+

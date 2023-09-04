@@ -1,0 +1,16 @@
+﻿TYPE "LMB_ModbusDeviceRtu_ComPortData"
+VERSION : 0.1
+   STRUCT
+      port : PORT := 271;   // ID Port
+      baud : UDInt := 9600;   // Baudrate
+      parity : UInt := 2;   // Parity (0- None, 1 - Odd, 2 - Even)
+      stopBits : UInt;   // Number of stop bits per character Valid values 1 and 2
+      timeout : UInt := 500;   // Response timeout, ms
+      status : Word;   // Response timeout
+      done : Bool;   // Execution of instruction completed without error
+      error : Bool;   // Error
+      retries : Word := 2;   // The number of repeated attempts by the master before the error code 0x80C8 is returned for "No response
+   END_STRUCT;
+
+END_TYPE
+

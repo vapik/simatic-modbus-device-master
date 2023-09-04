@@ -1,0 +1,15 @@
+﻿FUNCTION "LMB_ModbusDeviceRtu_ValidateRequest" : Bool
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      data : "LMB_ModbusDeviceRtu_RequestCfg";
+   END_VAR
+
+
+BEGIN
+	#LMB_ModbusDeviceRtu_ValidateRequest :=
+	#data.len > 0
+	AND (#data.mode >= 0 AND #data.mode <= 2);
+	
+END_FUNCTION
+
