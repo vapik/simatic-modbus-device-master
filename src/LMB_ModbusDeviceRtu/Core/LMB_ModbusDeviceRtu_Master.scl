@@ -38,8 +38,8 @@ VERSION : 0.1
       STATE_WRITE : USInt := 3;   // State. Writing
       STATE_HANDLE : USInt := 4;   // State. Handle results
       WATCHDOG_TIME : Time := T#10S;   // Watchdog time
-      ERROR_ILLEGAL_REQUEST : Word := 16#8500;   // Error. Illegal request (check request settings)
-      ERROR_WATCHDOG_TIMER : Word := 16#8501;   // Error. Watchdog timer
+      ERROR_ILLEGAL_REQUEST : Word := 16#9000;   // Error. Illegal request (check request settings)
+      ERROR_WATCHDOG_TIMER : Word := 16#9001;   // Error. Watchdog timer
    END_VAR
 
 
