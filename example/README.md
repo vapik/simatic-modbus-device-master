@@ -24,3 +24,5 @@ CB 1241 (RS485): 6ES7 241-1CH30-1XB0
 
 ### Types
 - DeviceData.udt - structure of device data.
+
+> Don't forget to add "LMBMD" library from "src" folder to TIA Portal project
