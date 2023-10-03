@@ -1,0 +1,13 @@
+﻿DATA_BLOCK "DataDb"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      device : "DeviceData";
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

@@ -1,0 +1,16 @@
+﻿FUNCTION "ModbusRtu_Device2_MapData" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      mdata : "LMBMD_ModbusDeviceRtu_Data";
+      data : "DeviceData";
+   END_VAR
+
+
+BEGIN
+	// Data
+	#data.param1 := #mdata.buffer.writeBuffer[0];
+	#data.param2 := #mdata.buffer.writeBuffer[1];
+	
+END_FUNCTION
+

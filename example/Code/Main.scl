@@ -1,0 +1,13 @@
+﻿ORGANIZATION_BLOCK "Main"
+TITLE = "Main Program Sweep (Cycle)"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	"inst_ModbusRtu_Master"(com:="LMB_ModbusDeviceRtu_CfgDb".com,
+	                        mbCommLoad:="Modbus_Comm_Load_DB",
+	                        mbMaster:="Modbus_Master_DB");
+	
+	
+END_ORGANIZATION_BLOCK
+

@@ -1,0 +1,36 @@
+﻿DATA_BLOCK "ModbusRtuMaster_DevicesDb"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      device1 : "LMBMD_ModbusDeviceRtu_Data";   // Device 1
+      device2 : "LMBMD_ModbusDeviceRtu_Data";   // Device 2
+   END_VAR
+
+
+BEGIN
+   device1.address := 1;
+   device1.requests[0].cfg.mode := 0;
+   device1.requests[0].cfg.dataAddr := 40001;
+   device1.requests[0].cfg.len := 2;
+   device1.requests[0].cfg.mapAddr := 0;
+   device1.requests[0].cfg.enable := true;
+   device1.requests[1].cfg.mode := 0;
+   device1.requests[1].cfg.dataAddr := 40002;
+   device1.requests[1].cfg.len := 1;
+   device1.requests[1].cfg.mapAddr := 1;
+   device1.requests[1].cfg.enable := TRUE;
+   device1.requests[9].cfg.mode := 0;
+   device1.requests[9].cfg.dataAddr := 40001;
+   device1.requests[9].cfg.len := 1;
+   device1.requests[9].cfg.mapAddr := 0;
+   device1.requests[9].cfg.enable := false;
+   device2.address := 2;
+   device2.requests[0].cfg.mode := 1;
+   device2.requests[0].cfg.dataAddr := 40001;
+   device2.requests[0].cfg.len := 2;
+   device2.requests[0].cfg.mapAddr := 0;
+   device2.requests[0].cfg.enable := true;
+
+END_DATA_BLOCK
+

@@ -1,0 +1,80 @@
+﻿FUNCTION_BLOCK "ModbusRtu_Master"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      com : "LMBMD_ModbusDeviceRtu_ComPortData";   // Serial port settings
+      mbCommLoad {InstructionName := 'Modbus_Comm_Load'; LibVersion := '3.1'} : Modbus_Comm_Load;   // Instance of "Modbus_Comm_Load" function block
+      mbMaster {InstructionName := 'Modbus_Master'; LibVersion := '3.2'} : Modbus_Master;   // Instance of "Modbus_Master" function block
+   END_VAR
+
+   VAR 
+      initTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      inst_LModbusDeviceRtu_Master : "LMBMD_ModbusDeviceRtu_Master";
+      i { S7_SetPoint := 'True'} : UInt;
+      start : Bool;
+   END_VAR
+
+
+BEGIN
+	// Modbus RTU Master
+	
+	REGION Serial port initialization
+	    IF "FirstScan" THEN
+	        #mbCommLoad.MODE := 4;
+	    END_IF;
+	    
+	    #mbCommLoad.RETRIES := #com.retries;
+	    
+	    #mbCommLoad(REQ := "FirstScan",
+	                "PORT" := #com."port",
+	                BAUD := #com.baud,
+	                PARITY := #com.parity,
+	                MB_DB := #mbMaster.MB_DB,
+	                RESP_TO := #com.timeout,
+	                DONE => #com.done,
+	                ERROR => #com.error,
+	                STATUS => #com.status);
+	    
+	    #initTrig(CLK := #com.done);
+	    
+	    IF #initTrig.Q THEN
+	        #i := 0;
+	    END_IF;
+	END_REGION
+	
+	#start := NOT #inst_LModbusDeviceRtu_Master.done;
+	
+	CASE #i OF
+	    0:  // Device 1
+	        
+	        "ModbusRtu_Device1_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device1,
+	                                        data := "DataDb".device);
+	        
+	        #inst_LModbusDeviceRtu_Master(start := #start,
+	                                 readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
+	                                 writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,
+	                                 data := "ModbusRtuMaster_DevicesDb".device1,
+	                                 mbMaster := #mbMaster);
+	        
+	        IF #inst_LModbusDeviceRtu_Master.done THEN
+	            #i := #i + 1;
+	        END_IF;
+	        
+	    1:  // Device 2
+	        "ModbusRtu_Device2_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device2,
+	                                        data := "DataDb".device);
+	        
+	        #inst_LModbusDeviceRtu_Master(start := #start,
+	                                 readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
+	                                 writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,
+	                                 data := "ModbusRtuMaster_DevicesDb".device2,
+	                                 mbMaster := #mbMaster);
+	        
+	        IF #inst_LModbusDeviceRtu_Master.done THEN
+	            #i := #i + 1;
+	        END_IF;
+	    ELSE
+	        #i := 0;
+	END_CASE;
+END_FUNCTION_BLOCK
+
