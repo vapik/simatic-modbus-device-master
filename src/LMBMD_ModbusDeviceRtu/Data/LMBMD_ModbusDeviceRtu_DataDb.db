@@ -1,0 +1,14 @@
+﻿DATA_BLOCK "LMBMD_ModbusDeviceRtu_DataDb"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+   STRUCT 
+      readBuffer : Array[0..255] of Byte;
+      writeBuffer : Array[0..255] of Byte;
+   END_STRUCT;
+
+
+BEGIN
+
+END_DATA_BLOCK
+

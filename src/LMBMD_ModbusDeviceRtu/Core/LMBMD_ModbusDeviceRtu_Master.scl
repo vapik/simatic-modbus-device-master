@@ -1,4 +1,4 @@
-﻿FUNCTION_BLOCK "LMB_ModbusDeviceRtu_Master"
+﻿FUNCTION_BLOCK "LMBMD_ModbusDeviceRtu_Master"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_INPUT 
@@ -13,11 +13,12 @@ VERSION : 0.1
    VAR_IN_OUT 
       readBuffer : Variant;   // Pointer of read buffer (non optimized data block). For example, DB -> readBuffer: Array[0..125] of Word
       writeBuffer : Variant;   // Pointer of write buffer (non optimized data block). For example, DB -> writeBuffer: Array[0..125] of Word
-      data : "LMB_ModbusDeviceRtu_Data";
+      data : "LMBMD_ModbusDeviceRtu_Data";
       mbMaster {InstructionName := 'Modbus_Master'; LibVersion := '3.2'} : Modbus_Master;   // Instance of Modbus_Master function block
    END_VAR
 
    VAR 
+      buffer : Array[0..127] of Word;
       inst_startTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : R_TRIG;   // Detect start
       inst_watchdogTimer {InstructionName := 'TON_TIME'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;   // Timer for resetting a request when unknown reason is happened
       state { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : USInt;   // Current state
@@ -29,6 +30,7 @@ VERSION : 0.1
       tempStart : Bool;   // Start flag
       tempRetval : Int;
       tempQntRequests : Int;   // Quantity of requests
+      tempZeroIndex : DInt;
    END_VAR
 
    VAR CONSTANT 
@@ -44,7 +46,7 @@ VERSION : 0.1
 
 
 BEGIN
-	#tempQntRequests := UDINT_TO_INT("LMB_ModbusDeviceRtu_GetArrayLength"(arr := #data.requests));
+	#tempQntRequests := UDINT_TO_INT("LMBMD_ModbusDeviceRtu_GetArrayLength"(arr := #data.requests));
 	#busy := (#state > #STATE_STANDBY); // Set busy flag
 	
 	#inst_startTrig(CLK := #start, Q => #tempStart);
@@ -96,7 +98,7 @@ BEGIN
 	                #data.requests[#j].status.status := 0;
 	                #data.requests[#j].status.errorCounter := 0;
 	                
-	            ELSIF NOT "LMB_ModbusDeviceRtu_ValidateRequest"(#data.requests[#j].cfg) THEN
+	            ELSIF NOT "LMBMD_ModbusDeviceRtu_ValidateRequest"(#data.requests[#j].cfg) THEN
 	                
 	                // Set error status
 	                #data.requests[#j].status.req := false;
@@ -127,6 +129,7 @@ BEGIN
 	            #tempRetval := Serialize(SRC_VARIABLE := #data.buffer.writeBuffer,
 	                                     DEST_ARRAY => #writeBuffer,
 	                                     POS := #data.requests[#i].cfg.mapAddr);
+	            
 	            #state := #STATE_WRITE;
 	        ELSE
 	            #state := #STATE_READ;
@@ -146,6 +149,17 @@ BEGIN
 	        
 	        IF #data.requests[#i].status.done THEN
 	            #data.requests[#i].status.errorCounter := 0;
+	            
+	            // Copy from modbus buffer to device buffer
+	            #tempZeroIndex := 0;
+	            #tempRetval := Deserialize(SRC_ARRAY:= #readBuffer,
+	                                       DEST_VARIABLE=> #buffer,
+	                                       POS:= #tempZeroIndex);
+	            
+	            MOVE_BLK(IN:= #buffer[0],
+	                     COUNT:= #data.requests[#i].cfg.len,
+	                     OUT=>#data.buffer.readBuffer[#data.requests[#i].cfg.mapAddr]);
+	            
 	        ELSIF #data.requests[#i].status.error THEN
 	            #data.requests[#i].status.errorCounter := LIMIT(IN := #data.requests[#i].status.errorCounter + 1,
 	                                                            MN := 0,

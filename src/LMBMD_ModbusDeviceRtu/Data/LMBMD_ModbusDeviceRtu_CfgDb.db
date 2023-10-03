@@ -1,10 +1,10 @@
-﻿DATA_BLOCK "LMB_ModbusDeviceRtu_CfgDb"
+﻿DATA_BLOCK "LMBMD_ModbusDeviceRtu_CfgDb"
 { S7_Optimized_Access := 'TRUE' }
 AUTHOR : Veshtemov
 VERSION : 0.1
 NON_RETAIN
    VAR 
-      com : "LMB_ModbusDeviceRtu_ComPortData";
+      com : "LMBMD_ModbusDeviceRtu_ComPortData";
    END_VAR
 
 
