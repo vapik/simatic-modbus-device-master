@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Device-oriented Modbus RTU Master for S7-1200/S7-1500
 The library show you how to organize polling modbus devices.
 If you have several devices you don't need to code every request and its order, requests are contained in cfg structure for each device separately.
@@ -7,10 +6,3 @@ You need only make an order for polling each device and make a function for mapp
 Take a look at **example** folder
 
 >The detailded description will be sooon.
-
-
-
-=======
-# simatic-modbus-device-master
-Device oriented Modbus polling for S7-1200/S7-1500 PLC (TIA Portal)
->>>>>>> 6719572326ce98f1d82e1d60f176b5429719463e
