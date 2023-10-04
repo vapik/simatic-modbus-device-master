@@ -1,4 +1,4 @@
-﻿TYPE "LMB_ModbusDeviceRtu_RequestStatus"
+﻿TYPE "LMBMD_ModbusDeviceRtu_RequestStatus"
 VERSION : 0.1
 //Modbus request status
    STRUCT

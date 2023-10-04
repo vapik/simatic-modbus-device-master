@@ -1,4 +1,4 @@
-﻿TYPE "LMB_ModbusDeviceRtu_RequestCfg"
+﻿TYPE "LMBMD_ModbusDeviceRtu_RequestCfg"
 VERSION : 0.1
 //Modbus request configuration
    STRUCT

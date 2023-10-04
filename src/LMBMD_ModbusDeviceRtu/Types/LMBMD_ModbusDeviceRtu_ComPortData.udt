@@ -1,4 +1,4 @@
-﻿TYPE "LMB_ModbusDeviceRtu_ComPortData"
+﻿TYPE "LMBMD_ModbusDeviceRtu_ComPortData"
 VERSION : 0.1
    STRUCT
       port : PORT := 271;   // ID Port

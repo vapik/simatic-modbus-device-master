@@ -1,9 +1,9 @@
-﻿TYPE "LMB_ModbusDeviceRtu_Data"
+﻿TYPE "LMBMD_ModbusDeviceRtu_Data"
 VERSION : 0.1
    STRUCT
       address : UInt;   // Modbus RTU station address
-      buffer : "LMB_ModbusDeviceRtu_Buffer";
-      requests : Array[0..9] of "LMB_ModbusDeviceRtu_Request";
+      buffer : "LMBMD_ModbusDeviceRtu_Buffer";
+      requests : Array[0..9] of "LMBMD_ModbusDeviceRtu_Request";
    END_STRUCT;
 
 END_TYPE

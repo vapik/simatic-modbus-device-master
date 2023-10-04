@@ -1,4 +1,4 @@
-﻿TYPE "LMB_ModbusDeviceRtu_Buffer"
+﻿TYPE "LMBMD_ModbusDeviceRtu_Buffer"
 VERSION : 0.1
 //Raw data of Modbus device
    STRUCT
