@@ -9,7 +9,7 @@ VERSION : 0.1
 
 BEGIN
 	// Data
-	#data.param1 := #mdata.buffer.readBuffer[0];
-	#data.param2 := #mdata.buffer.readBuffer[1];
+	#data.param1 := #mdata.buffer[0];
+	#data.param2 := #mdata.buffer[1];
 END_FUNCTION
 

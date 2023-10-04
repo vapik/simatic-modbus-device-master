@@ -125,10 +125,15 @@ BEGIN
 	        // For writing before request we have to copy data to external write buffer
 	        IF #data.requests[#i].cfg.mode > 0 THEN
 	            
-	            // Extract data from Modbus Device write buffer
-	            #tempRetval := Serialize(SRC_VARIABLE := #data.buffer.writeBuffer,
+	            // Extract data from Modbus Device to write buffer
+	            MOVE_BLK(IN := #data.#buffer[#data.requests[#i].cfg.mapAddr],
+	                     COUNT := #data.requests[#i].cfg.len,
+	                     OUT => #buffer[0]);
+	            
+	            #tempZeroIndex := 0;
+	            #tempRetval := Serialize(SRC_VARIABLE := #buffer,
 	                                     DEST_ARRAY => #writeBuffer,
-	                                     POS := #data.requests[#i].cfg.mapAddr);
+	                                     POS := #tempZeroIndex);
 	            
 	            #state := #STATE_WRITE;
 	        ELSE
@@ -151,14 +156,16 @@ BEGIN
 	            #data.requests[#i].status.errorCounter := 0;
 	            
 	            // Copy from modbus buffer to device buffer
-	            #tempZeroIndex := 0;
-	            #tempRetval := Deserialize(SRC_ARRAY:= #readBuffer,
-	                                       DEST_VARIABLE=> #buffer,
-	                                       POS:= #tempZeroIndex);
-	            
-	            MOVE_BLK(IN:= #buffer[0],
-	                     COUNT:= #data.requests[#i].cfg.len,
-	                     OUT=>#data.buffer.readBuffer[#data.requests[#i].cfg.mapAddr]);
+	            IF #data.requests[#i].cfg.mode = 0 THEN
+	                
+	                #tempZeroIndex := 0;
+	                #tempRetval := Deserialize(SRC_ARRAY := #readBuffer,
+	                                           DEST_VARIABLE => #buffer,
+	                                           POS := #tempZeroIndex);
+	                MOVE_BLK(IN := #buffer[0],
+	                         COUNT := #data.requests[#i].cfg.len,
+	                         OUT => #data.buffer[#data.requests[#i].cfg.mapAddr]);
+	            END_IF;
 	            
 	        ELSIF #data.requests[#i].status.error THEN
 	            #data.requests[#i].status.errorCounter := LIMIT(IN := #data.requests[#i].status.errorCounter + 1,

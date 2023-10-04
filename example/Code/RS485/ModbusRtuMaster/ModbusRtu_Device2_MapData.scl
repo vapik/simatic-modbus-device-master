@@ -9,8 +9,8 @@ VERSION : 0.1
 
 BEGIN
 	// Data
-	#data.param1 := #mdata.buffer.writeBuffer[0];
-	#data.param2 := #mdata.buffer.writeBuffer[1];
+	#mdata.buffer[0] := #data.param1;
+	#mdata.buffer[1] := #data.param2;
 	
 END_FUNCTION
 

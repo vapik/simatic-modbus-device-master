@@ -27,7 +27,7 @@ BEGIN
    device1.requests[9].cfg.enable := false;
    device2.address := 2;
    device2.requests[0].cfg.mode := 1;
-   device2.requests[0].cfg.dataAddr := 40001;
+   device2.requests[0].cfg.dataAddr := 40003;
    device2.requests[0].cfg.len := 2;
    device2.requests[0].cfg.mapAddr := 0;
    device2.requests[0].cfg.enable := true;

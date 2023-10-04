@@ -56,14 +56,16 @@ BEGIN
 	                                 data := "ModbusRtuMaster_DevicesDb".device1,
 	                                 mbMaster := #mbMaster);
 	        
-	        IF #inst_LModbusDeviceRtu_Master.done THEN
-	            #i := #i + 1;
-	        END_IF;
+	   IF #inst_LModbusDeviceRtu_Master.done THEN
+	       #i := #i + 1;
+	   END_IF;
 	        
 	    1:  // Device 2
 	        "ModbusRtu_Device2_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device2,
 	                                        data := "DataDb".device);
-	        
+	            
+	            "ModbusRtuMaster_DevicesDb".device2.requests[0].cfg.mapAddr := "ModbusRtuMaster_DevicesDb".device2.requests[0].cfg.mapAddr;
+	            
 	        #inst_LModbusDeviceRtu_Master(start := #start,
 	                                 readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
 	                                 writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,

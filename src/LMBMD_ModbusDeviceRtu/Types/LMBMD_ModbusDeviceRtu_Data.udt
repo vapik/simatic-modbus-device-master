@@ -2,7 +2,7 @@
 VERSION : 0.1
    STRUCT
       address : UInt;   // Modbus RTU station address
-      buffer : "LMBMD_ModbusDeviceRtu_Buffer";
+      buffer : Array[0..100] of Word;
       requests : Array[0..9] of "LMBMD_ModbusDeviceRtu_Request";
    END_STRUCT;
 
