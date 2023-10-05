@@ -1,5 +1,5 @@
 # Device-oriented Modbus RTU Master for S7-1200/S7-1500
-> version: 0.0.2
+> version: 0.0.3
 
 The library show you how to organize polling modbus devices.
 If you have several devices you don't need to code every request and its order, requests are contained in cfg structure for each device separately.
