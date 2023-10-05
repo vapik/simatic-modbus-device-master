@@ -1,1 +1,5 @@
-simatic
+# Folder with TIA Projects
+# folder for compiled libs or projects will be "/tia/generated/"
+/tia/projects/
+
+
