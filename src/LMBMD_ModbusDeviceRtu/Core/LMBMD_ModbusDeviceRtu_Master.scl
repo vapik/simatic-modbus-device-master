@@ -49,7 +49,8 @@ BEGIN
 	#tempQntRequests := UDINT_TO_INT("LMBMD_ModbusDeviceRtu_GetArrayLength"(arr := #data.requests));
 	#busy := (#state > #STATE_STANDBY); // Set busy flag
 	
-	#inst_startTrig(CLK := #start, Q => #tempStart);
+	#inst_startTrig(CLK := #start,
+	                Q => #tempStart);
 	
 	// When start go to Settings
 	IF #tempStart THEN
@@ -61,13 +62,13 @@ BEGIN
 	
 	CASE #state OF
 	        
-	    // Standby
+	        // Standby
 	    #STATE_STANDBY:
 	        
 	        #done := false;
 	        #i := 0;
 	        
-	    // Get request settings
+	        // Get request settings
 	    #STATE_SETTINGS:
 	        
 	        // With the first call we reset the counter, get the first request,
@@ -98,7 +99,7 @@ BEGIN
 	                #data.requests[#j].status.status := 0;
 	                #data.requests[#j].status.errorCounter := 0;
 	                
-	            ELSIF NOT "LMBMD_ModbusDeviceRtu_ValidateRequest"(#data.requests[#j].cfg) THEN
+	            ELSIF NOT "LMBMD_ModbusDeviceRtu_ValidateRequest"(data := #data, index := #j) THEN
 	                
 	                // Set error status
 	                #data.requests[#j].status.req := false;
@@ -142,12 +143,12 @@ BEGIN
 	        
 	        RETURN;
 	        
-	    // Read
+	        // Read
 	    #STATE_READ, #STATE_WRITE:
 	        
 	        #data.requests[#i].status.req := true;
 	        
-	    // Handle results
+	        // Handle results
 	    #STATE_HANDLE:
 	        
 	        #data.requests[#i].status.req := false;
@@ -220,8 +221,8 @@ BEGIN
 	// Watchdog timer is needed when state stuck in Read or Write state for unknown reason,
 	// in that case we set request as invalid 
 	#inst_watchdogTimer(IN := (#state = #STATE_READ
-	               OR #state = #STATE_WRITE),
-	               PT := #WATCHDOG_TIME);
+	                    OR #state = #STATE_WRITE),
+	                    PT := #WATCHDOG_TIME);
 	
 	IF #inst_watchdogTimer.Q THEN
 	    
