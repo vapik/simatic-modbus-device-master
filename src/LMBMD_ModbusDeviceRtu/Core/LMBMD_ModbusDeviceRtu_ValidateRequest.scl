@@ -1,15 +1,33 @@
-﻿FUNCTION "LMB_ModbusDeviceRtu_ValidateRequest" : Bool
+﻿FUNCTION "LMBMD_ModbusDeviceRtu_ValidateRequest" : Bool
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
+   VAR_INPUT 
+      index : Int;   // Index of request
+   END_VAR
+
    VAR_IN_OUT 
-      data : "LMB_ModbusDeviceRtu_RequestCfg";
+      data : "LMBMD_ModbusDeviceRtu_Data";
+   END_VAR
+
+   VAR_TEMP 
+      tempBufferSize : Int;   // Size of data.buffer
    END_VAR
 
 
 BEGIN
-	#LMB_ModbusDeviceRtu_ValidateRequest :=
-	#data.len > 0
-	AND (#data.mode >= 0 AND #data.mode <= 2);
+	#tempBufferSize := UDINT_TO_INT("LMBMD_ModbusDeviceRtu_GetArrayLength"(arr := #data.buffer));
+	
+	// Check request:
+	// * Valid length
+	// * Valid mode
+	// * Valid mapping to/from buffer
+	// other will be checking by Modbus_Master FB
+	
+	#LMBMD_ModbusDeviceRtu_ValidateRequest :=
+	#data.requests[#index].cfg.len > 0
+	AND (#data.requests[#index].cfg.mode >= 0 AND #data.requests[#index].cfg.mode <= 2)
+	AND (#data.requests[#index].cfg.mapAddr + #data.requests[#index].cfg.len) <= #tempBufferSize
+	;
 	
 END_FUNCTION
 
