@@ -12,12 +12,12 @@ BEGIN
    device1.address := 1;
    device1.requests[0].cfg.mode := 0;
    device1.requests[0].cfg.dataAddr := 40001;
-   device1.requests[0].cfg.len := 2;
+   device1.requests[0].cfg.len := 1;
    device1.requests[0].cfg.mapAddr := 0;
    device1.requests[0].cfg.enable := true;
    device1.requests[1].cfg.mode := 0;
    device1.requests[1].cfg.dataAddr := 40002;
-   device1.requests[1].cfg.len := 1;
+   device1.requests[1].cfg.len := 2;
    device1.requests[1].cfg.mapAddr := 1;
    device1.requests[1].cfg.enable := TRUE;
    device1.requests[9].cfg.mode := 0;
@@ -28,7 +28,7 @@ BEGIN
    device2.address := 2;
    device2.requests[0].cfg.mode := 1;
    device2.requests[0].cfg.dataAddr := 40003;
-   device2.requests[0].cfg.len := 2;
+   device2.requests[0].cfg.len := 3;
    device2.requests[0].cfg.mapAddr := 0;
    device2.requests[0].cfg.enable := true;
 

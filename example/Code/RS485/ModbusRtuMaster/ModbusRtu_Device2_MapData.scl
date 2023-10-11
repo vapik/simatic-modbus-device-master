@@ -11,6 +11,7 @@ BEGIN
 	// Data
 	#mdata.buffer[0] := #data.param1;
 	#mdata.buffer[1] := #data.param2;
+	#mdata.buffer[2] := #data.param3;
 	
 END_FUNCTION
 

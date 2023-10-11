@@ -47,9 +47,6 @@ BEGIN
 	CASE #i OF
 	    0:  // Device 1
 	        
-	        "ModbusRtu_Device1_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device1,
-	                                    data := "DataDb".device);
-	        
 	        #inst_LModbusDeviceRtu_Master(start := #start,
 	                                      readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
 	                                      writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,
@@ -57,6 +54,10 @@ BEGIN
 	                                      mbMaster := #mbMaster);
 	        
 	        IF #inst_LModbusDeviceRtu_Master.done THEN
+	            
+	            "ModbusRtu_Device1_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device1,
+	                                        data := "DataDb".device);
+	            
 	            #i := #i + 1;
 	        END_IF;
 	        
