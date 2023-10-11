@@ -8,10 +8,10 @@ VERSION : 0.1
    END_VAR
 
    VAR 
-      initTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
-      inst_LModbusDeviceRtu_Master : "LMBMD_ModbusDeviceRtu_Master";
-      i { S7_SetPoint := 'True'} : UInt;
-      start : Bool;
+      initTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;   // Trig to set serial port is ready
+      inst_LModbusDeviceRtu_Master : "LMBMD_ModbusDeviceRtu_Master";   // Instance of "LMBMD_ModbusDevice"
+      i { S7_SetPoint := 'True'} : Int := -1;   // Token ring: -1 - serial port isn't ready, 0 - device 1, 1 - device 2
+      start : Bool;   // Flag to start polling
    END_VAR
 
 
@@ -48,29 +48,27 @@ BEGIN
 	    0:  // Device 1
 	        
 	        "ModbusRtu_Device1_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device1,
-	                                        data := "DataDb".device);
+	                                    data := "DataDb".device);
 	        
 	        #inst_LModbusDeviceRtu_Master(start := #start,
-	                                 readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
-	                                 writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,
-	                                 data := "ModbusRtuMaster_DevicesDb".device1,
-	                                 mbMaster := #mbMaster);
+	                                      readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
+	                                      writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,
+	                                      data := "ModbusRtuMaster_DevicesDb".device1,
+	                                      mbMaster := #mbMaster);
 	        
-	   IF #inst_LModbusDeviceRtu_Master.done THEN
-	       #i := #i + 1;
-	   END_IF;
+	        IF #inst_LModbusDeviceRtu_Master.done THEN
+	            #i := #i + 1;
+	        END_IF;
 	        
 	    1:  // Device 2
 	        "ModbusRtu_Device2_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device2,
-	                                        data := "DataDb".device);
-	            
-	            "ModbusRtuMaster_DevicesDb".device2.requests[0].cfg.mapAddr := "ModbusRtuMaster_DevicesDb".device2.requests[0].cfg.mapAddr;
-	            
+	                                    data := "DataDb".device);
+	        
 	        #inst_LModbusDeviceRtu_Master(start := #start,
-	                                 readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
-	                                 writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,
-	                                 data := "ModbusRtuMaster_DevicesDb".device2,
-	                                 mbMaster := #mbMaster);
+	                                      readBuffer := "LMBMD_ModbusDeviceRtu_DataDb".readBuffer,
+	                                      writeBuffer := "LMBMD_ModbusDeviceRtu_DataDb".writeBuffer,
+	                                      data := "ModbusRtuMaster_DevicesDb".device2,
+	                                      mbMaster := #mbMaster);
 	        
 	        IF #inst_LModbusDeviceRtu_Master.done THEN
 	            #i := #i + 1;
