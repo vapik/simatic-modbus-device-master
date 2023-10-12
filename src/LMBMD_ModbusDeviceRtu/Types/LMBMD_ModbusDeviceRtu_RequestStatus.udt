@@ -2,12 +2,12 @@
 VERSION : 0.1
 //Modbus request status
    STRUCT
-      req : Bool;
-      done : Bool;
-      busy : Bool;
-      error : Bool;
+      req : Bool;   // Send request
+      done : Bool;   // Request is done
+      busy : Bool;   // Request is in progress
+      error : Bool;   // Error
       status : Word;   // Error code 
-      errorCounter : UInt;
+      errorCounter : UInt;   // Counter of failed attempts
    END_STRUCT;
 
 END_TYPE
