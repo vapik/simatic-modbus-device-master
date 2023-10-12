@@ -2,7 +2,7 @@
 > Requirements: 
 > Hardware: CPU 1214C - *6ES7 214-1AG40-0XB0*, CB1241 - *6ES7 241-1CH30-1XB0*
 > Software: TIA Portal V15.1 or higher
-> Download TIA-project: [link](tia/generated/LMBMD_ModbusDeviceRtu_0.0.4.zap15_1)
+> Download TIA-project: [link](/tia/generated/LMBMD_ModbusDeviceRtu_0.0.4.zap15_1)
 
 In the example we read 3 registers from *Device1* and write these values to *Device2*.
 Reading data from device *Device1* is performed in 2 requests: read 40001, read 40002,40003
@@ -13,16 +13,17 @@ Writing to the *Device2* device is performed in one request: writing to 40003, 4
 The DB *ModbusRtuMaster_DevicesDb.device1* contains the query configuration for *Device1*.
 Request 1 (*requests[0]*): Read register 40001, place value in *device1.buffer[0]*.
 Request 2 (*requests[1]*): Read register 40002..40003, place values in *device1.buffer[1]..device1.buffer[2]*
-![example read](docs/images/example read.png)
+![example read](/docs/images/example read.png)
 
 ### Device2
 The DB *ModbusRtuMaster_DevicesDb.device2* contains the query configuration for *Device2*.
 Request 1 (*requests[0]*): Write from *device1.buffer[0]..device1.buffer[2]* to registers 40003..40005.
-![example write](docs/images/example write.png)
+![example write](/docs/images/example write.png)
 
 ## Code
 The main logic is located in the function block ***ModbusRtu_Master***
-![example read](docs/images/ModbusDeviceRtu_Master.png)
+![example read](/docs/images/ModbusDeviceRtu_Master.png)
+![subroutines](/docs/images/subroutines.png)
 
 ### Initializing the serial port
 Initialization must occur once when the controller is started; for this, the *FirstScan* system flag is used.
@@ -53,8 +54,6 @@ REGION Serial port initialization
      END_IF;
 END_REGION
 ```
-
-![subroutines](docs/images/subroutines.png)
 
 ### Poll Device1
 To call instance of FB *"LMBMD_ModbusDeviceRtu_Master"* you need to send a single pulse to the *start* input
