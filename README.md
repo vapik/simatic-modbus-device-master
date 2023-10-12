@@ -1,6 +1,7 @@
 # Modbus RTU Master device-oriented library for S7-1200/S7-1500
 > Last version: v0.0.4
-> TIA Portal, Simatic, S7-1200, S7-1500, Modbus
+
+> tags: TIA Portal, Simatic, S7-1200, S7-1500, Modbus
 
 ## Short description
 The library is a wrap of internal library [Modbus_Master](https://support.industry.siemens.com/cs/mdm/109742272?c=86342756619&lc=en-WW). 
