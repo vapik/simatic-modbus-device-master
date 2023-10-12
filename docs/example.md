@@ -15,12 +15,14 @@ Writing to the *Device2* device is performed in one request: writing to 40003, 4
 The DB *ModbusRtuMaster_DevicesDb.device1* contains the query configuration for *Device1*.
 Request 1 (*requests[0]*): Read register 40001, place value in *device1.buffer[0]*.
 Request 2 (*requests[1]*): Read register 40002..40003, place values in *device1.buffer[1]..device1.buffer[2]*
-![example read](/docs/images/example read.png)
+
+![example read](/docs/images/example_read.png)
 
 ### Device2
 The DB *ModbusRtuMaster_DevicesDb.device2* contains the query configuration for *Device2*.
 Request 1 (*requests[0]*): Write from *device1.buffer[0]..device1.buffer[2]* to registers 40003..40005.
-![example write](/docs/images/example write.png)
+
+![example write](/docs/images/example_write.png)
 
 ## Code
 The main logic is located in the function block ***ModbusRtu_Master***
