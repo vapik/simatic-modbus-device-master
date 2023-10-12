@@ -14,5 +14,5 @@ Description of *Modbus_Master*: [Overview of the Modbus RTU communication (S7-12
 Example: [link How do you establish MODBUS-RTU communication?](https://support.industry.siemens.com/cs/attachments/47756141/47756141_Description.pdf)
 
 Contents
-- [Example](https://github.com/vapik/simatic-modbus-device-master/blob/main/docs/example.md)
-- [License](https://github.com/vapik/simatic-modbus-device-master/blob/main/docs/license.md)
+- [Example](/docs/example.md)
+- [License](/docs/license.md)
