@@ -1,10 +1,18 @@
-# Device-oriented Modbus RTU Master for S7-1200/S7-1500
-> version: 0.0.3
+# Modbus RTU Master device-oriented library for S7-1200/S7-1500
+> Last version: v0.0.4
+> TIA Portal, Simatic, S7-1200, S7-1500, Modbus
 
-The library show you how to organize polling modbus devices.
-If you have several devices you don't need to code every request and its order, requests are contained in cfg structure for each device separately.
-Function block **LMBMD_ModbusDeviceRtu_Master** make requests, put data to memory (different for each device), provide signal "done" when polling is finished.
-You need only make an order for polling each device and make a function for mapping memory to inner blocks.
-Take a look at **example** folder
+## Short description
+The library is a wrap of internal library [Modbus_Master](https://support.industry.siemens.com/cs/mdm/109742272?c=86342756619&lc=en-WW). 
+In the library, requests are grouped for each network device separately, and devices are sequentially polled.
+Each network device has a local data buffer.
 
->The detailed description will be sooon.
+If you need to poll several devices, this library will help you reduce the amount of code, organize the polling order.
+
+Before diving into the library I recommend to read: 
+Description of *Modbus_Master*: [Overview of the Modbus RTU communication (S7-1200, S7-1500)](https://support.industry.siemens.com/cs/mdm/109742272?c=58089698955&lc=en-WW)
+Example: [link How do you establish MODBUS-RTU communication?](https://support.industry.siemens.com/cs/attachments/47756141/47756141_Description.pdf)
+
+Contents
+- [Example](https://github.com/vapik/simatic-modbus-device-master/blob/main/docs/example.md)
+- [License](https://github.com/vapik/simatic-modbus-device-master/blob/main/docs/license.md)
