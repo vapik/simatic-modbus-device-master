@@ -32,7 +32,7 @@ Request 1 (*requests[0]*): Write from *device1.buffer[0]..device1.buffer[2]* to 
 ## Code
 The main logic is located in the function block ***ModbusRtu_Master***
 
-![example read](/docs/images/ModbusRtu_Master.png.png)
+![example read](/docs/images/ModbusRtu_Master.png)
 ![subroutines](/docs/images/subroutines.png)
 
 ### Initializing the serial port
