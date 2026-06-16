@@ -1,0 +1,20 @@
+﻿DATA_BLOCK "LVT_ModbusDeviceRtu_CfgDb"
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Veshtemov
+VERSION : 0.1
+NON_RETAIN
+   VAR RETAIN
+      com { S7_SetPoint := 'False'} : "LVT_typeModbusDeviceRtu_ComPortData";
+   END_VAR
+
+
+BEGIN
+   com.port := 271;
+   com.baud := 9600;
+   com.parity := 0;
+   com.stopBits := 0;
+   com.timeout := 500;
+   com.retries := 1;
+
+END_DATA_BLOCK
+

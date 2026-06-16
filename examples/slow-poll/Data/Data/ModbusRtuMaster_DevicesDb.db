@@ -1,0 +1,31 @@
+﻿DATA_BLOCK "ModbusRtuMaster_DevicesDb"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR RETAIN
+      devices { S7_SetPoint := 'False'} : Array[0..2] of "LVT_typeModbusDeviceRtu_Data";
+   END_VAR
+
+
+BEGIN
+   devices[0].address := 1;
+   devices[0].requests[0].cfg.mode := 0;
+   devices[0].requests[0].cfg.dataAddr := 40001;
+   devices[0].requests[0].cfg.len := 1;
+   devices[0].requests[0].cfg.mapAddr := 0;
+   devices[0].requests[0].cfg.enable := true;
+   devices[1].address := 2;
+   devices[1].requests[0].cfg.mode := 0;
+   devices[1].requests[0].cfg.dataAddr := 40001;
+   devices[1].requests[0].cfg.len := 1;
+   devices[1].requests[0].cfg.mapAddr := 0;
+   devices[1].requests[0].cfg.enable := true;
+   devices[2].address := 3;
+   devices[2].requests[0].cfg.mode := 0;
+   devices[2].requests[0].cfg.dataAddr := 40001;
+   devices[2].requests[0].cfg.len := 1;
+   devices[2].requests[0].cfg.mapAddr := 0;
+   devices[2].requests[0].cfg.enable := true;
+
+END_DATA_BLOCK
+

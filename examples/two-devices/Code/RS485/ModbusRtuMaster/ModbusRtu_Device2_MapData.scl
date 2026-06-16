@@ -1,0 +1,43 @@
+﻿FUNCTION "ModbusRtu_Device2_MapData" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      mdata : "LVT_typeModbusDeviceRtu_Data";
+      data : "DeviceData";
+   END_VAR
+
+
+BEGIN
+	REGION Block info header
+	    //===============================================================================
+	    // (company) / (c)Copyright year
+	    //-------------------------------------------------------------------------------
+	    // Title:            Example of LVT_ModbusDevcieRtu library
+	    // Comment/Function: Modbus RTU Master device-oriented
+	    //                   Copy data from device to modbus buffer for writing data
+	    // Library/Family:   LVT 
+	    // Author:           Anatoly Veshtemov
+	    // Tested with:      CPU 1214C
+	    // Engineering:      TIA Portal V17
+	    // Restrictions:     no
+	    // Requirements:     PLC (S7-1200 / S7-1500)
+	    //-------------------------------------------------------------------------------
+	    // Change log table:
+	    // Version  | Date       | Expert in charge       | Changes applied
+	    //----------|------------|------------------------|------------------------------
+	    // 00.00.01 17.06.2026  First release
+	    //=============================================================================
+	    
+	END_REGION Block info header
+	
+	REGION DESCRIPTION
+	    (/**/)
+	END_REGION DESCRIPTION
+	
+	// Data
+	#mdata.buffer[0] := #data.param1;
+	#mdata.buffer[1] := #data.param2;
+	#mdata.buffer[2] := #data.param3;
+	
+END_FUNCTION
+

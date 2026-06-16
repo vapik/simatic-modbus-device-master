@@ -1,0 +1,9 @@
+﻿TYPE "LVT_typeModbusDeviceRtu_Request"
+VERSION : 0.1
+   STRUCT
+      cfg { S7_SetPoint := 'False'} : "LVT_typeModbusDeviceRtu_RequestCfg";
+      status { S7_SetPoint := 'False'} : "LVT_typeModbusDeviceRtu_RequestStatus";
+   END_STRUCT;
+
+END_TYPE
+

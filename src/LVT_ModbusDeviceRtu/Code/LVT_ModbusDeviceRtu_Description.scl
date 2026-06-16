@@ -1,0 +1,30 @@
+﻿FUNCTION "LVT_ModbusDeviceRtu_Description" : Void
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'Anatoly Veshtemov'
+FAMILY : LVT
+
+BEGIN
+	REGION INFO
+	(/*
+	title: Library for Modbus Rtu Master
+	subTitle: STEP 7 Basic/Professional (TIA PORTAL) / SIMATIC S7-1200 / S7-1500
+	shortDescription: Modbus RTU Master device-oriented library for S7-1200/S7-1500
+	type: Library
+	fileName: LVT_ModbusDeviceRtu_Lib
+	link: https://github.com/vapik/simatic-modbus-device-master
+	*/)
+	END_REGION INFO
+	
+	REGION ChangeLog
+	(*
+	Version  | Date       | Expert in charge       | Changes applied
+	---------|------------|------------------------|------------------------------
+	00.01.00 | 17.06.2026 | Upgrate to TIA V17
+	         |            | Added block info headers
+	         |            | Refactor names
+	         |            | Examples has deleted                  
+	         |            | Chanhed name to LVT_ModbusDeviceRtu                           
+	*)
+	END_REGION
+END_FUNCTION
+

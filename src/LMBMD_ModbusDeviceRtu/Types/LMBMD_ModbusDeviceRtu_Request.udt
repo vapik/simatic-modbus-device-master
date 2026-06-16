@@ -1,9 +1,0 @@
-﻿TYPE "LMBMD_ModbusDeviceRtu_Request"
-VERSION : 0.1
-   STRUCT
-      cfg : "LMBMD_ModbusDeviceRtu_RequestCfg";
-      status : "LMBMD_ModbusDeviceRtu_RequestStatus";
-   END_STRUCT;
-
-END_TYPE
-

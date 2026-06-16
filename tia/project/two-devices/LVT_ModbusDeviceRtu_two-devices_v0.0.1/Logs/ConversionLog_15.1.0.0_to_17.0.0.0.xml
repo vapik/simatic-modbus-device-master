@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type='text/xsl' href='ConversionLogFile.xsl'?>
+<LogFile projectName="LMBMD_ModbusDeviceRtu_0.0.4" typeText="Type" messageText="Message" timeText="Time">
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:19 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Upgrade started" />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:31:21 AM" Debug="false">
+    <Text>Reorganization succeed!</Text>
+  </Details>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:21 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="CheckRepair lost+found objects" />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:31:21 AM" Debug="false">
+    <Text>No error is detected.</Text>
+  </Details>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:21 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="CheckRepair missing bidirectional links" />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:31:22 AM" Debug="false">
+    <Text>No error is detected.</Text>
+  </Details>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:22 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="CheckRepair clear segment flags" />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:31:22 AM" Debug="false">
+    <Text>No error is detected.</Text>
+  </Details>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. Comment object had no culture infos." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:31:38 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Repair 'Comment' for DeviceDataObject S7-1200 station_1. DeviceData is a Shell or ModuleDevice." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:00 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\LMBMD_ModbusDeviceRtu\Core\LMBMD_ModbusDeviceRtu_GetArrayLength' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:00 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\Example\RS485\ModbusRtuMaster\ModbusRtu_Master' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\Example\RS485\ModbusRtuMaster\ModbusRtu_Device1_MapData' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\LMBMD_ModbusDeviceRtu\Core\LMBMD_ModbusDeviceRtu_Master' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\Example\Main' - Checksum inconsistency for 'General; Event'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\LMBMD_ModbusDeviceRtu\Core\LMBMD_ModbusDeviceRtu_ValidateRequest' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\Example\RS485\ModbusRtuMaster\ModbusRtu_Device2_MapData' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\LMBMD_ModbusDeviceRtu\Data\LMBMD_ModbusDeviceRtu_CfgDb' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\LMBMD_ModbusDeviceRtu\Data\LMBMD_ModbusDeviceRtu_DataDb' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\Example\Data\DataDb' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\Example\Data\ModbusRtuMaster_DevicesDb' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\Example\Inst\inst_ModbusRtu_Master' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\SystemBlocksFolder\ProgramResourcesFolder\Modbus_Comm_Load_DB' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ProgramBlocksFolder\SystemBlocksFolder\ProgramResourcesFolder\Modbus_Master_DB' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ControllerDataTypeFolder\LMBMD_ModbusDeviceRtu_Master\LMBMD_ModbusDeviceRtu_ComPortData' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ControllerDataTypeFolder\LMBMD_ModbusDeviceRtu_Master\LMBMD_ModbusDeviceRtu_RequestCfg' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ControllerDataTypeFolder\LMBMD_ModbusDeviceRtu_Master\LMBMD_ModbusDeviceRtu_RequestStatus' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ControllerDataTypeFolder\LMBMD_ModbusDeviceRtu_Master\LMBMD_ModbusDeviceRtu_Request' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ControllerDataTypeFolder\LMBMD_ModbusDeviceRtu_Master\LMBMD_ModbusDeviceRtu_Data' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Warning" Timestamp="2/7/2024 9:32:01 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Project element: '\PLC_1\ControllerDataTypeFolder\Example\DeviceData' - Checksum inconsistency for 'General'." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:32:03 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="The cross-reference information is being converted." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:32:04 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="The cross-reference information was created successfully." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:32:04 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="Conversion of the cross-reference information is finished." />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:32:04 AM" Debug="false">
+    <Text>Package container 'Siemens.Simatic.Lang.S7BSW.V15.1.0.0.NonMandatory' was deleted</Text>
+  </Details>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:32:04 AM" Debug="false">
+    <Text>Product version 'Siemens.Simatic.STEP7.Basic:15.01.00.00' was deleted</Text>
+  </Details>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:32:04 AM" Debug="false">
+    <Text>Product version 'Siemens.Simatic.HSP.HW.S71200_CPU_Bundle_4.3:01.00.00.00' was deleted</Text>
+  </Details>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:32:04 AM" Debug="false">
+    <Text>Product version 'Siemens.Simatic.HSP.HW.S71200_CPU_4.3:01.00.00.00' was deleted</Text>
+  </Details>
+  <MessageCell ServiceId="Automation-ObjectFrame-Feedbacks" MessageId="ConversionInfoTabProjectSucceeded" MessageClass="Success" Timestamp="2/7/2024 9:32:05 AM">
+    <Number ServiceNumber="80" MessageNumber="34" />
+    <Text FeedbackText="Project 'D:\Veshtemov\src\simatic_projects\Own\LMBDB_ModbusDeviceRtu\simatic-modbus-device-master\tia\projects\LMBMD_ModbusDeviceRtu_0.0.4\System\PEData.plf' was successfully upgraded and saved as project 'D:\Veshtemov\src\simatic_projects\Own\LMBDB_ModbusDeviceRtu\simatic-modbus-device-master\tia\projects\LMBMD_ModbusDeviceRtu_0.0.4_V17\System\PEData.plf'." />
+    <Help HelpId="-1" HelpFile="" />
+  </MessageCell>
+  <MessageCell ServiceId="80" MessageId="30" MessageClass="Information" Timestamp="2/7/2024 9:32:06 AM">
+    <Number ServiceNumber="80" MessageNumber="30" />
+    <Text FeedbackText="FinalCheckRemainingErrors" />
+    <Help HelpId="-1" />
+  </MessageCell>
+  <Details ServiceId="80" MessageId="30" Timestamp="2/7/2024 9:32:06 AM" Debug="false">
+    <Text>No error is detected.</Text>
+  </Details>
+</LogFile>

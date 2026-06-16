@@ -1,0 +1,9 @@
+﻿TYPE "DeviceData"
+VERSION : 0.1
+   STRUCT
+      param1 : Word;   // Parameter 1
+      error : Bool;   // Flag. The device don't respond
+   END_STRUCT;
+
+END_TYPE
+

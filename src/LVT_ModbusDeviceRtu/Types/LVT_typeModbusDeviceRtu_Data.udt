@@ -1,0 +1,10 @@
+﻿TYPE "LVT_typeModbusDeviceRtu_Data"
+VERSION : 0.1
+   STRUCT
+      address : UInt;   // Modbus RTU station address
+      buffer : Array[0..100] of Word;   // Local buffer
+      requests { S7_SetPoint := 'False'} : Array[0..9] of "LVT_typeModbusDeviceRtu_Request";   // Requests
+   END_STRUCT;
+
+END_TYPE
+

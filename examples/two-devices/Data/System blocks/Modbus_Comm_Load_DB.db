@@ -1,0 +1,15 @@
+﻿DATA_BLOCK "Modbus_Comm_Load_DB"
+{InstructionName := 'Modbus_Comm_Load';
+ LibVersion := '3.1';
+ S7_Optimized_Access := 'TRUE' }
+AUTHOR : SIMATIC
+FAMILY : MODBUS
+NAME : MBCOMLOA
+VERSION : 3.0
+NON_RETAIN
+Modbus_Comm_Load
+
+BEGIN
+
+END_DATA_BLOCK
+

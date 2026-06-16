@@ -1,0 +1,15 @@
+﻿DATA_BLOCK "Modbus_Master_DB"
+{InstructionName := 'Modbus_Master';
+ LibVersion := '3.2';
+ S7_Optimized_Access := 'FALSE' }
+AUTHOR : SIMATIC
+FAMILY : MODBUS
+NAME : MB_MASTR
+VERSION : 3.2
+NON_RETAIN
+Modbus_Master
+
+BEGIN
+
+END_DATA_BLOCK
+

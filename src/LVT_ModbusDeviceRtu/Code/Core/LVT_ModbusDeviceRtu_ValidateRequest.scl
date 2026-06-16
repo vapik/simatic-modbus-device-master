@@ -1,0 +1,63 @@
+﻿FUNCTION "LVT_ModbusDeviceRtu_ValidateRequest" : Bool
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'Anatoly Veshtemov'
+FAMILY : LVT
+   VAR_INPUT 
+      index : Int;   // Index of request
+   END_VAR
+
+   VAR_IN_OUT 
+      data : "LVT_typeModbusDeviceRtu_Data";
+   END_VAR
+
+   VAR_TEMP 
+      tempBufferSize : Int;   // Size of data.buffer
+   END_VAR
+
+
+BEGIN
+	REGION Block info header
+	    //===============================================================================
+	    // (company) / (c)Copyright year
+	    //-------------------------------------------------------------------------------
+	    // Title:            LVT_ModbusDevcieRtu_Master
+	    // Comment/Function: Modbus RTU Master device-oriented
+	    //                   Check settings of request: valid length, mode and mapping
+	
+	    // Library/Family:   LVT 
+	    // Author:           Anatoly Veshtemov
+	    // Tested with:      CPU 1214C
+	    // Engineering:      TIA Portal V17
+	    // Restrictions:     no
+	    // Requirements:     PLC (S7-1200 / S7-1500)
+	    //-------------------------------------------------------------------------------
+	    // Change log table:
+	    // Version  | Date       | Expert in charge       | Changes applied
+	    //----------|------------|------------------------|------------------------------
+	    // 00.00.04 01.01.2023  First released version
+	    // 00.01.00 17.06.2026  Upgrate to TIA V17
+	    //                      Added block info header
+	    //=============================================================================
+	    
+	END_REGION Block info header
+	
+	REGION DESCRIPTION
+	    (/**/)
+	END_REGION DESCRIPTION
+	
+	#tempBufferSize := UDINT_TO_INT("LVT_ModbusDeviceRtu_GetArrayLength"(arr := #data.buffer));
+	
+	// Check request:
+	// * Valid length
+	// * Valid mode
+	// * Valid mapping to/from buffer
+	// other will be checking by Modbus_Master FB
+	
+	#LVT_ModbusDeviceRtu_ValidateRequest :=
+	#data.requests[#index].cfg.len > 0
+	AND (#data.requests[#index].cfg.mode >= 0 AND #data.requests[#index].cfg.mode <= 2)
+	AND (#data.requests[#index].cfg.mapAddr + #data.requests[#index].cfg.len) <= #tempBufferSize
+	;
+	
+END_FUNCTION
+

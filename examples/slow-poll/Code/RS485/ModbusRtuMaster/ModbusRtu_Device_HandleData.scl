@@ -1,0 +1,60 @@
+﻿FUNCTION "ModbusRtu_Device_HandleData" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      mdata : "LVT_typeModbusDeviceRtu_Data";
+      data : "DeviceData";
+   END_VAR
+
+   VAR_TEMP 
+      i : Int;   // Increment
+      statQuantityErrors : UInt;   // Quantity of failed requests
+   END_VAR
+
+   VAR CONSTANT 
+      ERRORS_THRESHOLD : Int := 3;   // Max. quantity of failed requests 
+      MAX_REQUEST_INDEX : Int := 9;   // Max. index of array with requests
+   END_VAR
+
+
+BEGIN
+	REGION Block info header
+	    //===============================================================================
+	    // (company) / (c)Copyright year
+	    //-------------------------------------------------------------------------------
+	    // Title:            Example of LVT_ModbusDevcieRtu library
+	    // Comment/Function: Modbus RTU Master device-oriented
+	    //                   Copy data to device from modbus buffer, set connection status
+	    // Library/Family:   LVT 
+	    // Author:           Anatoly Veshtemov
+	    // Tested with:      CPU 1214C
+	    // Engineering:      TIA Portal V17
+	    // Restrictions:     no
+	    // Requirements:     PLC (S7-1200 / S7-1500)
+	    //-------------------------------------------------------------------------------
+	    // Change log table:
+	    // Version  | Date       | Expert in charge       | Changes applied
+	    //----------|------------|------------------------|------------------------------
+	    // 00.00.01 17.06.2026  First release
+	    //=============================================================================
+	    
+	END_REGION Block info header
+	
+	REGION DESCRIPTION
+	    (/**/)
+	END_REGION DESCRIPTION
+	
+	
+	// Data
+	#data.param1 := #mdata.buffer[0];
+	
+	// Calculate quantity of failed requests
+	#statQuantityErrors := 0;
+	FOR #i := 0 TO #MAX_REQUEST_INDEX - 1 DO
+	    #statQuantityErrors += #mdata.requests[#i].status.errorCounter;
+	END_FOR;
+	
+	// Set error status
+	#data.error := #statQuantityErrors >= #ERRORS_THRESHOLD;
+END_FUNCTION
+

@@ -1,0 +1,10 @@
+﻿DATA_BLOCK "inst_ModbusRtu_Master"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+"ModbusRtu_Master"
+
+BEGIN
+
+END_DATA_BLOCK
+

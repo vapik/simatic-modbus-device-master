@@ -1,0 +1,44 @@
+﻿FUNCTION "LVT_ModbusDeviceRtu_GetArrayLength" : UDInt
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : 'Anatoly Veshtemov'
+FAMILY : LVT
+   VAR_INPUT 
+      arr : Variant;
+   END_VAR
+
+
+BEGIN
+	REGION Block info header
+	    //===============================================================================
+	    // (company) / (c)Copyright year
+	    //-------------------------------------------------------------------------------
+	    // Title:            LVT_ModbusDevcieRtu_Master
+	    // Comment/Function: Modbus RTU Master device-oriented
+	    //                   Get array length
+	    // Library/Family:   LVT
+	    // Author:           Anatoly Veshtemov
+	    // Tested with:      CPU 1214C
+	    // Engineering:      TIA Portal V17
+	    // Restrictions:     no
+	    // Requirements:     PLC (S7-1200 / S7-1500)
+	    //-------------------------------------------------------------------------------
+	    // Change log table:
+	    // Version  | Date       | Expert in charge       | Changes applied
+	    //----------|------------|------------------------|------------------------------
+	    // 00.00.04 01.01.2023  First released version
+	    //=============================================================================
+	    
+	END_REGION Block info header
+	
+	REGION DESCRIPTION
+	    (/**/)
+	END_REGION DESCRIPTION
+	
+	IF IS_ARRAY(#arr) THEN
+	    #LVT_ModbusDeviceRtu_GetArrayLength := CountOfElements(IN := #arr);
+	ELSE
+	    #LVT_ModbusDeviceRtu_GetArrayLength := 0;
+	END_IF;
+	
+END_FUNCTION
+

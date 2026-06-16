@@ -1,0 +1,108 @@
+﻿FUNCTION_BLOCK "ModbusRtu_Master"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      com : "LVT_typeModbusDeviceRtu_ComPortData";   // Serial port settings
+      mbCommLoad {InstructionName := 'Modbus_Comm_Load'; LibVersion := '3.1'} : Modbus_Comm_Load;   // Instance of "Modbus_Comm_Load" function block
+      mbMaster {InstructionName := 'Modbus_Master'; LibVersion := '3.2'} : Modbus_Master;   // Instance of "Modbus_Master" function block
+   END_VAR
+
+   VAR 
+      stat_InitTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;   // Trig to set serial port is ready
+      stat_LModbusDeviceRtu_Master : "LVT_ModbusDeviceRtu_Master";   // Instance of "LMBMD_ModbusDevice"
+      i { S7_SetPoint := 'True'} : Int := 0;   // Index
+      statStart : Bool;   // Flag to start polling
+   END_VAR
+
+
+BEGIN
+	REGION Block info header
+	    //===============================================================================
+	    // (company) / (c)Copyright year
+	    //-------------------------------------------------------------------------------
+	    // Title:            Example of LVT_ModbusDevcieRtu library
+	    // Comment/Function: Modbus RTU Master device-oriented
+	    //                   This functional block polls 3 registers from Device1 and write these values to Device2
+	    // Library/Family:   LMB (Library Modbus)
+	    // Author:           Anatoly Veshtemov
+	    // Tested with:      CPU 1214C
+	    // Engineering:      TIA Portal V17
+	    // Restrictions:     no
+	    // Requirements:     PLC (S7-1200 / S7-1500)
+	    //-------------------------------------------------------------------------------
+	    // Change log table:
+	    // Version  | Date       | Expert in charge       | Changes applied
+	    //----------|------------|------------------------|------------------------------
+	    // 00.01.00 17.06.2026  First release
+	    //=============================================================================
+	    
+	END_REGION Block info header
+	
+	REGION DESCRIPTION
+	    (/**/)
+	END_REGION DESCRIPTION
+	
+	
+	// Modbus RTU Master
+	
+	REGION Serial port initialization
+	    IF "FirstScan" THEN
+	        #mbCommLoad.MODE := 4;
+	    END_IF;
+	    
+	    #mbCommLoad.RETRIES := #com.retries;
+	    
+	    #mbCommLoad(REQ := "FirstScan",
+	                "PORT" := #com."port",
+	                BAUD := #com.baud,
+	                PARITY := #com.parity,
+	                MB_DB := #mbMaster.MB_DB,
+	                RESP_TO := #com.timeout,
+	                DONE => #com.done,
+	                ERROR => #com.error,
+	                STATUS => #com.status);
+	    
+	    #stat_InitTrig(CLK := #com.done);
+	    
+	    IF #stat_InitTrig.Q THEN
+	        #i := 0;
+	    END_IF;
+	END_REGION
+	
+	#statStart := NOT #stat_LModbusDeviceRtu_Master.done;
+	
+	CASE #i OF
+	    0:  // Device 1
+	        
+	        #stat_LModbusDeviceRtu_Master(start := #statStart,
+	                                      readBuffer := "LVT_ModbusDeviceRtu_DataDb".readBuffer,
+	                                      writeBuffer := "LVT_ModbusDeviceRtu_DataDb".writeBuffer,
+	                                      data := "ModbusRtuMaster_DevicesDb".device1,
+	                                      mbMaster := #mbMaster);
+	        
+	        IF #stat_LModbusDeviceRtu_Master.done THEN
+	            
+	            "ModbusRtu_Device1_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device1,
+	                                        data := "DataDb".device);
+	            
+	            #i := #i + 1;
+	        END_IF;
+	        
+	    1:  // Device 2
+	        "ModbusRtu_Device2_MapData"(mdata := "ModbusRtuMaster_DevicesDb".device2,
+	                                    data := "DataDb".device);
+	        
+	        #stat_LModbusDeviceRtu_Master(start := #statStart,
+	                                      readBuffer := "LVT_ModbusDeviceRtu_DataDb".readBuffer,
+	                                      writeBuffer := "LVT_ModbusDeviceRtu_DataDb".writeBuffer,
+	                                      data := "ModbusRtuMaster_DevicesDb".device2,
+	                                      mbMaster := #mbMaster);
+	        
+	        IF #stat_LModbusDeviceRtu_Master.done THEN
+	            #i := #i + 1;
+	        END_IF;
+	    ELSE
+	        #i := 0;
+	END_CASE;
+END_FUNCTION_BLOCK
+

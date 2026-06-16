@@ -1,0 +1,125 @@
+﻿FUNCTION_BLOCK "ModbusRtu_Master"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      com : "LVT_typeModbusDeviceRtu_ComPortData";   // Serial port settings
+      mbCommLoad {InstructionName := 'Modbus_Comm_Load'; LibVersion := '3.1'} : Modbus_Comm_Load;   // Instance of "Modbus_Comm_Load" function block
+      mbMaster {InstructionName := 'Modbus_Master'; LibVersion := '3.2'} : Modbus_Master;   // Instance of "Modbus_Master" function block
+   END_VAR
+
+   VAR 
+      allowPolles : Array[0..#MAX_DEV_INDEX] of Bool;   // Allow polling
+      slowPollTimers {InstructionName := 'TON_TIME'; LibVersion := '1.0'; S7_SetPoint := 'False'} : Array[0..#MAX_DEV_INDEX] of TON_TIME;   // Slow poll timer
+      stat_InitTrig {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;   // Trig to set serial port is ready
+      stat_LModbusDeviceRtu_Master : "LVT_ModbusDeviceRtu_Master";   // Instance of "LMBMD_ModbusDevice"
+      i { S7_SetPoint := 'True'} : Int := 0;   // Index
+      j : Int := 0;   // Index
+      statStart : Bool;   // Flag to start polling
+   END_VAR
+
+   VAR CONSTANT 
+      MAX_DEV_INDEX : Int := 2;   // Max index in devices array
+      SLOW_POLL_TIME : Time := T#10s;   // Slow poll time
+   END_VAR
+
+
+BEGIN
+	REGION Block info header
+	    //===============================================================================
+	    // (company) / (c)Copyright year
+	    //-------------------------------------------------------------------------------
+	    // Title:            Example of LVT _ModbusDevcieRtu library
+	    // Comment/Function: Modbus RTU Master device-oriented
+	    //                   This functional block polls 1 register in 3 indentical devices,
+	    //                   If a device fails to respond 3 times, a slowPollTimer is activated 
+	    //                   and polling is blocked until timer expires
+	    // Library/Family:   LMB (Library Modbus)
+	    // Author:           Anatoly Veshtemov
+	    // Tested with:      CPU 1214C
+	    // Engineering:      TIA Portal V17
+	    // Restrictions:     no
+	    // Requirements:     PLC (S7-1200 / S7-1500)
+	    //-------------------------------------------------------------------------------
+	    // Change log table:
+	    // Version  | Date       | Expert in charge       | Changes applied
+	    //----------|------------|------------------------|------------------------------
+	    // 00.01.00 17.06.2026  First release
+	    //=============================================================================
+	    
+	END_REGION Block info header
+	
+	REGION DESCRIPTION
+	    (/**/)
+	END_REGION DESCRIPTION
+	
+	
+	// Modbus RTU Master
+	
+	REGION Serial port initialization
+	    IF "FirstScan" THEN
+	        #mbCommLoad.MODE := 4;
+	    END_IF;
+	    
+	    #mbCommLoad.RETRIES := #com.retries;
+	    
+	    #mbCommLoad(REQ := "FirstScan",
+	                "PORT" := #com."port",
+	                BAUD := #com.baud,
+	                PARITY := #com.parity,
+	                MB_DB := #mbMaster.MB_DB,
+	                RESP_TO := #com.timeout,
+	                DONE => #com.done,
+	                ERROR => #com.error,
+	                STATUS => #com.status);
+	    
+	    #stat_InitTrig(CLK := #com.done);
+	    
+	    IF #stat_InitTrig.Q THEN
+	        #i := 0;
+	    END_IF;
+	END_REGION
+	
+	#statStart := NOT #stat_LModbusDeviceRtu_Master.done;
+	
+	REGION Slow poll
+	    
+	    FOR #j := 0 TO #MAX_DEV_INDEX DO
+	        
+	        // Update Slow Poll timers
+	        #slowPollTimers[#j](IN := "DataDb".devices[#j].error,
+	                            PT := #SLOW_POLL_TIME);
+	        
+	        // Polling is allowed if there are no error or timer is ended.        
+	        #allowPolles[#j] := NOT ("DataDb".devices[#j].error AND #slowPollTimers[#j].Q);
+	        
+	    END_FOR;
+	    
+	END_REGION
+	
+	CASE #i OF
+	    0..#MAX_DEV_INDEX:  // Device 1..Devices 3
+	        
+	        IF #allowPolles[#i] THEN
+	            #stat_LModbusDeviceRtu_Master(start := #statStart,
+	                                          readBuffer := "LVT_ModbusDeviceRtu_DataDb".readBuffer,
+	                                          writeBuffer := "LVT_ModbusDeviceRtu_DataDb".writeBuffer,
+	                                          data := "ModbusRtuMaster_DevicesDb".devices[#i],
+	                                          mbMaster := #mbMaster);
+	            
+	            IF #stat_LModbusDeviceRtu_Master.done THEN
+	                
+	                "ModbusRtu_Device_HandleData"(mdata := "ModbusRtuMaster_DevicesDb".devices[#i],
+	                                              data := "DataDb".devices[#i]);
+	                
+	                #i := #i + 1;
+	            END_IF;
+	            
+	        ELSE
+	            #i := #i + 1;
+	        END_IF;
+	        
+	    ELSE
+	        #i := 0;
+	END_CASE;
+END_FUNCTION_BLOCK
+

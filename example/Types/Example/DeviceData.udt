@@ -1,9 +1,0 @@
-﻿TYPE "DeviceData"
-VERSION : 0.1
-   STRUCT
-      param1 : Word;
-      param2 : Word;
-   END_STRUCT;
-
-END_TYPE
-
