@@ -4,6 +4,8 @@
 > 
 > Software: TIA Portal V17 or higher
 > 
+> Download LVT_ModbusDeviceRtu and open library: [link](/tia/generated/lib/LVT_ModbusDeviceRtu.zal17)
+> 
 > Download TIA-project: [link](/tia/generated/LVT_ModbusDeviceRtu_two-devices_v0.0.1.zap17)
 
 In the example we read 3 registers from *Device1* and write these values to *Device2*.

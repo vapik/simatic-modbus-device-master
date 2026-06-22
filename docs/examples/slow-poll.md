@@ -3,8 +3,10 @@
 > Hardware: CPU 1214C - *6ES7 214-1AG40-0XB0*, CB1241 - *6ES7 241-1CH30-1XB0*
 > 
 > Software: TIA Portal V17 or higher
+>
+> Download LVT_ModbusDeviceRtu and open library: [link](/tia/generated/lib/LVT_ModbusDeviceRtu.zal17)
 > 
-> Download TIA-project: [link](/tia/generated/LVT_ModbusDeviceRtu_slow-poll_v0.0.1.zap17)
+> Download TIA-project: [link](/tia/generated/slow-poll/LVT_ModbusDeviceRtu_slow-poll_v0.0.1.zap17) 
 
 When multiple devices are on the same bus, a fault on one device will slow down the polling of all devices.
 This example implements a mechanism called "slow-poll":
@@ -14,8 +16,6 @@ We read 1 register in 3 indentical devices. If a device fails to respond 3 times
 ### Devices
 The DB *ModbusRtuMaster_DevicesDb* contains array of devices *devices[0..2]*.
 Every device contain request 1 (*requests[0]*): Read register 40001, place value in *device1.buffer[0]*.
-
-![example read](/docs/images/slow-poll/example_read.png)
 
 ## Code
 The main logic is located in the function block ***ModbusRtu_Master***

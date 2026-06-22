@@ -1,5 +1,5 @@
 # Modbus RTU Master device-oriented library for S7-1200/S7-1500
-> Last version: v0.1.0:
+> Last version: v0.1.1:
 > Refactor old (0.0.4) repository
 
 ## Short description
@@ -18,6 +18,6 @@ Example: [link How do you establish MODBUS-RTU communication?](https://support.i
 
 ## Contents
 
-- [Example. Two devices](/docs/two-devices.md)
-- [Example. Slow-poll mode](/docs/slow-poll.md)
+- [Example. Two devices](/docs/examples/two-devices.md)
+- [Example. Slow-poll mode](/docs/examples/slow-poll.md)
 - [License](/docs/license.md)
