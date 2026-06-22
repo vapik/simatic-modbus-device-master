@@ -3,6 +3,8 @@
 > Hardware: CPU 1214C - *6ES7 214-1AG40-0XB0*, CB1241 - *6ES7 241-1CH30-1XB0*
 > 
 > Software: TIA Portal V17 or higher
+>
+> Download LVT_ModbusDeviceRtu and open library: [link](/tia/generated/lib/LVT_ModbusDeviceRtu.zal17)
 > 
 > Download TIA-project: [link](/tia/generated/slow-poll/LVT_ModbusDeviceRtu_slow-poll_v0.0.1.zap17) 
 
